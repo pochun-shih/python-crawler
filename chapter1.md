@@ -1,15 +1,16 @@
-## 安裝 Python 2
+## 安裝 Python 3
 
 #### Windows ：
 
 - [Python 官網](https://www.python.org/)
-- 在 Downloads 標籤裡選擇 2.7.14
-- 安裝時記得把 Add Python to PATH 選項勾起來 ， 如不勾之後請自行添加至 PATH 中
+- 在 Downloads 標籤裡選擇 3.6.4
+- 主標籤中預設為 32 位元 ， 可以進入下載列表改成 64 位元
+- 安裝時記得把 Add Python to PATH 選項勾起來 ， 如不勾之後可以自行添加至 PATH 中
 - 記得一併安裝 pip
 
 #### Ubuntu ：
 
-Ubuntu 本身已經內建 Python 2 ， 就算版本稍微舊一點也可以
+新版本的 Ubuntu 本身已經內建 Python 2 與 3 ， 就算版本稍微舊一點也可以
 
 <hr>
 
@@ -20,22 +21,25 @@ windows 安裝 python 時會一併安裝 pip
 
 #### Ubuntu ：
 
-ubuntu 雖然內建 python2 但是沒有附贈 pip
-輸入指令安裝 pip
+ubuntu 雖然內建 python3　　但是沒有附贈 python3 的 pip　　輸入指令安裝 pip3
 ```
 $ sudo apt-get update
-$ sudo apt-get install python-pip
+$ sudo apt-get install python3-pip
 ``` 
 安裝好後建議更新 pip 至最新版本
+
+注意： windows 在安裝完 pip 時之後要使用打 pip 即可 ， 但是 ubuntu 內建 python2 與 3 ， 如需安裝 python2 的 pip 要輸入 ``sudo apt-get install python-pip`` ， 上面安裝的 pip3 是呼叫 python3 的 pip ， 而只有 pip 是呼叫 python2 的 pip 。
 
 <hr>
 
 ## Pip 說明
 
 pip 是 python 的套件管理程式 ， 以下為 pip 常用指令
+<br>
+ubuntu python3 記得將 pip 改成 pip3
 ```bash
 $ pip install [packagename] # 安裝套件
-$ pip install --upgrade pip # 更新 pip
+$ pip install --upgrade pip # 更新 pip ， 需管理員權限
 $ pip list # 套件列表
 $ pip freeze # 將套件列表以 requirements 格式印出
 $ pip freeze > requirements.txt # 套件列表用特定格式輸出到 requirements.txt
@@ -54,10 +58,7 @@ pip 安裝套件時預設會裝在全部環境底下<br>
 ```bash
 $ pip install pipenv
 ```
-更新 pipenv
-```bash
-$ pipenv --update
-```
+
 pipenv 是 python 官方推薦的套件管理工具 ， 可以用指定的 python 版本處理專案 ， pipenv 同時也內建 virtualenv<br>
 詳情參考[pipenv](https://pipenv.readthedocs.io/en/latest/)與[指令列表](https://github.com/pypa/pipenv#-usage)
 
@@ -180,8 +181,9 @@ $ pipenv install beautifulsoup4
 
 ## requests
 
-[request 文件](http://docs.python-requests.org/en/master/)
+[requests 文件](http://docs.python-requests.org/en/master/)
 requests 是 python 用來發出 http request 的套件 ， 之後將利用 requests 將所需要的網頁抓取下來 。
+[requests 進階用法](http://docs.python-requests.org/zh_CN/latest/user/advanced.html)
 
 <hr>
 

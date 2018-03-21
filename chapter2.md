@@ -7,6 +7,7 @@
 ```python
 # coding=utf-8
 ```
+在 python2 中如果不表達編碼 ， 程式內又包含中文等其他自元 ， 則會編譯失敗 。
 
 ## import 套件
 
@@ -69,7 +70,7 @@ div = soup.find("div", class_="b-list-container action-bar-margin bbs-screen")
 ```
 開檔 寫標題
 ```python
-with open('ptt.txt', 'w') as f:
+with open('ptt.txt', 'w', encoding="utf-8") as f:
     f.write("{:20}{:20}{:20}{:20}{:20}\n".format("版名", "人氣", "類別", "進版文字", "網址"))
 ```
 利用 for 迴圈取得每一個版
@@ -78,12 +79,12 @@ with open('ptt.txt', 'w') as f:
 ```
 拿內容文字並輸出至檔案
 ```python
-        url   = child.a["href"].encode('utf-8')
-        name  = child.find("div" , class_="board-name").text.encode('utf-8')
-        title = child.find("div" , class_="board-title").text.encode('utf-8')
-        ctype = child.find("div" , class_="board-class").text.encode('utf-8')
+        url   = child.a["href"]
+        name  = child.find("div" , class_="board-name").text
+        title = child.find("div" , class_="board-title").text
+        ctype = child.find("div" , class_="board-class").text
         count = child.find("div" , class_="board-nuser")
-        c     = count.span.text.encode('utf-8')
+        c     = count.span.text
         coco  = "{:20}{:20}{:20}{:20}{:20}\n".format(name, c, title, ctype, url)
         f.write(coco)
 ```
@@ -104,18 +105,18 @@ soup = BeautifulSoup((r.text), 'html.parser')
 # 尋找目標
 div = soup.find("div", class_="b-list-container action-bar-margin bbs-screen")
 # 寫檔
-with open('ptt.txt', 'w') as f:
+with open('ptt.txt', 'w', encoding="utf-8") as f:
     # 寫標題
     f.write("{:20}{:20}{:20}{:20}{:20}\n".format("版名", "人氣", "類別", "進版文字", "網址"))
     # 將每一個版逐一寫出
     for child in div.find_all("div", class_="b-ent"):
         # 取得所需文字
-        url   = child.a["href"].encode('utf-8')
-        name  = child.find("div" , class_="board-name").text.encode('utf-8')
-        title = child.find("div" , class_="board-title").text.encode('utf-8')
-        ctype = child.find("div" , class_="board-class").text.encode('utf-8')
+        url   = child.a["href"]
+        name  = child.find("div" , class_="board-name").text
+        title = child.find("div" , class_="board-title").text
+        ctype = child.find("div" , class_="board-class").text
         count = child.find("div" , class_="board-nuser")
-        c     = count.span.text.encode('utf-8')
+        c     = count.span.text
         # 合併成一行
         coco  = "{:20}{:20}{:20}{:20}{:20}\n".format(name, c, title, ctype, url)
         # 寫檔

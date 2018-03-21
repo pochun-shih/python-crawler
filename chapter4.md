@@ -4,13 +4,15 @@
 
 #### urllib
 
-urllib 在較高的 python 中內建 ， 不需額外安裝。
+urllib 在較高的 python 版本中內建 ， 不需額外安裝。
 <br>
 urllib 與 requests 相似 ， 可以對外發出請求 。
 <br>
+urllib3 在安裝 requests 時會一併安裝
+<br>
 最常用的有 urlopen() 與 urlretrieve() 方法 ， 前者為發出 http 請求 ， 後者為將網路資源取回 ， 如抓取圖片。
 <br>
-[urllib 中文說明文件](https://docs.python.org.tw/3/howto/urllib2.html)
+[urllib 文件](https://docs.python.org/3/library/urllib.html)(python 3)
 <br>
 [範例圖片](https://i.imgur.com/GuHulMWg.jpg)
 
@@ -22,12 +24,12 @@ urllib 與 requests 相似 ， 可以對外發出請求 。
 
 import 套件
 ```python
-import urllib
+import urllib.request
 ```
 
 抓取圖片
 ```python
-urllib.urlretrieve("https://i.imgur.com/GuHulMWg.jpg", "dog.jpg")
+urllib.request.urlretrieve("https://i.imgur.com/GuHulMWg.jpg", "dog.jpg")
 ```
 
 ## 整體
@@ -35,9 +37,9 @@ urllib.urlretrieve("https://i.imgur.com/GuHulMWg.jpg", "dog.jpg")
 ```python
 # coding=utf-8
 
-import urllib
+import urllib.request
 
-urllib.urlretrieve("https://i.imgur.com/GuHulMWg.jpg", "dog.jpg")
+urllib.request.urlretrieve("https://i.imgur.com/GuHulMWg.jpg", "dog.jpg")
 ```
 
 <hr>
@@ -73,6 +75,7 @@ postPage = 'https://accounts.pixiv.net/api/login?lang=zh_tw'
 loginPage 為登入頁
 <br>
 postPage 為登入時會 post 的網址
+<br>
 
 ##### 定義表頭與資料
 
@@ -89,7 +92,6 @@ payload = {
     'return_to': 'https://www.pixiv.net/'
 }
 ```
-不清楚哪些能拔掉
 <br>
 
 ##### 建立 requests
@@ -115,7 +117,7 @@ payload['post_key'] = post_key
 ```python
 l = s.post(postPage, data=payload)
 ```
-用 post 方法並帶資料
+用 post 方法並帶登入資訊
 <br>
 
 ##### 取得目標畫廊 ， 儲存圖片網址
@@ -124,7 +126,7 @@ l = s.post(postPage, data=payload)
 head = 'https://www.pixiv.net'
 url = []
 for li in lis:
-    url.append( li.a["href"].encode('utf-8') )
+    url.append( li.a["href"] )
 
 # work like a human
 time.sleep(1)
@@ -206,7 +208,7 @@ lis = gallery.find_all('li', class_='image-item', limit=2)
 head = 'https://www.pixiv.net'
 url = []
 for li in lis:
-    url.append( li.a["href"].encode('utf-8') )
+    url.append( li.a["href"] )
 
 time.sleep(1)
 
@@ -217,7 +219,7 @@ for i, u in enumerate(url):
     p = s.get(j)
     page = BeautifulSoup((p.text), 'html.parser')
     src = page.find('img', class_='original-image')['data-src']
-    print(src)
+    print('find: ' + src)
     time.sleep(2)
 
     # download image

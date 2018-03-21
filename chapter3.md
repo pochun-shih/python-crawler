@@ -127,9 +127,9 @@ titles = soup.find_all("td", class_="gsc-table-cell-snippet-close")
 <br>
 取標題文字並寫檔案 ： 
 ```python
-with open(u'雞排.txt', 'w') as f:
+with open('雞排.txt', 'w', encoding="utf-8") as f:
     for title in titles:
-        text = title.find("a", class_="gs-title").text.encode('utf-8')
+        text = title.find("a", class_="gs-title").text
         f.write(text + '\n')
 ```
 
@@ -165,15 +165,13 @@ def test_search(self):
 <br>
 修改搜尋框輸入值　：
 ```python
-search.send_keys(something.decode('big5'))
+search.send_keys(something)
 ```
-因為 windows cmd 預設編碼為 big5 ， 所以要將它變成 unicode 編碼
 <br>
 修改存檔名 ：
 ```python
-with open(something.decode('big5') + '.txt', 'w') as f:
+with open(something + '.txt', 'w', encoding="utf-8") as f:
 ```
-同上 ， 改成 unicode 編碼
 
 ## 整體
 ```python
@@ -215,19 +213,20 @@ class TestMobile01(unittest.TestCase):
 
         # 定位搜尋輸入框並輸入搜尋文字 ， sleep 是為了觀看成果所以暫停
         search = driver.find_element_by_xpath("//input[@name='search']")
-        search.send_keys(something.decode('big5'))
+        search.send_keys(something)
         time.sleep(3)
         search.send_keys(Keys.RETURN)
+        time.sleep(3)
 
         # 分析並取得每個標題
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         titles = soup.find_all("td", class_="gsc-table-cell-snippet-close")
 
         # 寫檔
-        with open(something.decode('big5') + '.txt', 'w') as f:
+        with open(something + '.txt', 'w', encoding="utf-8") as f:
             for title in titles:
                 # 定位標題
-                text = title.find("a", class_="gs-title").text.encode('utf-8')
+                text = title.find("a", class_="gs-title").text
                 f.write(text + '\n')
 
     def tearDown(self):
