@@ -51,7 +51,7 @@ if __name__ == "__main__":
 - tearDown 結束測試時會呼叫
 - test_yourFunctionName 要測試的功能
 
-要測試的功能一定要以 test_ 開頭 ， 此範例會測試三個功能 ， 即 setUp 與 tearDown 各會呼叫三次 ， 順序為 setUp() => test_function1() => tearDown() => setUp() => ...
+此範例會測試三個功能 ， 即 setUp 與 tearDown 各會呼叫三次 ， 順序為 setUp() => test_function1() => tearDown() => setUp() => ...
 
 ## 加入測試
 
